@@ -2,22 +2,23 @@
 # define CUB3D_H
 
 # include <stdio.h>
-
-// Temporary map until we have parsing
-static char MAP[6][6] = {
-    {'1', '1', '1', '1', '1', '1'},
-    {'1', '1', '0', '1', '0', '1'},
-    {'1', '0', '0', '1', '0', '1'},
-    {'1', '0', '0', '0', '0', '1'},
-    {'1', '0', 'P', '0', '0', '1'},
-    {'1', '1', '1', '1', '1', '1'}
-};
+# include <math.h>
+# include <stdlib.h> // Can remove it later since we will use libft
 
 typedef struct s_player
 {
-    double x;
-    double y;
-    double angle;
-} t_player;
+	double x;
+	double y;
+	double angle;
+}	t_player;
+
+typedef struct s_game
+{
+	char		**map;
+	t_player	*player;
+}	t_game;
+
+double	calculate_ray_len(t_game *game);
+double	calculate_straight_ray_len(t_game *game);
 
 #endif

@@ -1,29 +1,31 @@
 # Variables
+NAME = cub3d
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I./includes
-SRCS = src/cub3d.c
-OBJS_DIR = obj
-OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
-NAME = cub3d
+LIBS = -lm
+
+RAYS_SRCS = rays/calculate_ray_len.c rays/calculate_straight_ray_len.c
+
+SRCS_DIR = srcs
+SRCS = cub3d.c $(RAYS_SRCS)
+
+OBJS_DIR = objs
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 # Default rule
 all: $(NAME)
 
 # Linking the final executable
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 # Compiling source files into object files
-$(OBJS_DIR)/%.o: src/%.c | $(OBJS_DIR)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
-
-# Create the object directory if it doesn't exist
-$(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
 
 # Clean object files
 clean:
-	rm -rf $(OBJS_DIR)
+	rm -f $(OBJS)
 
 # Clean object files and the executable
 fclean: clean
