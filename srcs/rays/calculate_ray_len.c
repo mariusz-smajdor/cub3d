@@ -16,8 +16,39 @@ void initiate_ray(t_game *game, t_ray *ray)
 	ray->hypotenuse = 0;
 }
 
+double calculate_x_ray(t_game *game, t_ray *ray)
+{
+    ray->hypotenuse += ray->unit / sin(game->player->angle * M_PI / 180);
+    ray->y -= (ray->unit / sin(game->player->angle * M_PI / 180)) * cos(game->player->angle * M_PI / 180);
+    ray->x += ray->unit;
+    ray->unit = 1;
+    
+    if (game->map[(int)ray->y][(int)ray->x] == '1')
+	{
+		printf("x: %f, y: %f\n", ray->x, ray->y);
+        return (ray->hypotenuse);
+	}
+    return (-1);
+}
+
+double calculate_y_ray(t_game *game, t_ray *ray)
+{
+    ray->hypotenuse += ray->unit / cos(game->player->angle * M_PI / 180);
+    ray->x += (ray->unit / cos(game->player->angle * M_PI / 180)) * sin(game->player->angle * M_PI / 180);
+    ray->y -= ray->unit;
+    ray->unit = 1;
+    
+    if (game->map[(int)ray->y - 1][(int)ray->x] == '1')
+	{
+		printf("yyyyyyx: %f, y: %f\n", ray->x, ray->y);
+        return (ray->hypotenuse);
+	}
+    return (-1);
+}
+
 static double	calculate_ray_0_90_len(t_game *game)
 {
+    double	result;
 	t_ray	x_unit_ray;
 	t_ray	y_unit_ray;
 
@@ -28,28 +59,21 @@ static double	calculate_ray_0_90_len(t_game *game)
 		if (x_unit_ray.x != floor(x_unit_ray.x))
 			x_unit_ray.unit = ceil(x_unit_ray.x) - x_unit_ray.x;
 		if (y_unit_ray.y != floor(y_unit_ray.y))
-			y_unit_ray.unit = ceil(y_unit_ray.y) - y_unit_ray.y;
+			y_unit_ray.unit = y_unit_ray.y - floor(y_unit_ray.y);
+
 		if (x_unit_ray.unit / cos(game->player->angle * M_PI / 180) <
 			y_unit_ray.unit / sin(game->player->angle * M_PI / 180))
-		{
-			x_unit_ray.hypotenuse += x_unit_ray.unit / cos(game->player->angle * M_PI / 180);
-			x_unit_ray.y += x_unit_ray.hypotenuse * sin(game->player->angle * M_PI / 180);
-			x_unit_ray.x += x_unit_ray.unit;
-			x_unit_ray.unit = 1;
-			if (game->map[(int)x_unit_ray.y][(int)x_unit_ray.x] == '1')
-				return (x_unit_ray.hypotenuse);
-		}
+			result = calculate_y_ray(game, &y_unit_ray);
 		else
 		{
-			y_unit_ray.hypotenuse += y_unit_ray.unit / sin(game->player->angle * M_PI / 180);
-			y_unit_ray.x += y_unit_ray.hypotenuse * cos(game->player->angle * M_PI / 180);
-			y_unit_ray.y += y_unit_ray.unit;
-			y_unit_ray.unit = 1;
-			if (game->map[(int)y_unit_ray.y][(int)y_unit_ray.x] == '1')
-				return (y_unit_ray.hypotenuse);
+
+			result = calculate_x_ray(game, &x_unit_ray);
 		}
+		printf("x_ray.x: %f, x_ray.y: %f\n", x_unit_ray.x, x_unit_ray.y);
+		printf("y_ray.x: %f, y_ray.y: %f\n\n", y_unit_ray.x, y_unit_ray.y);
+		if (result != -1)
+			return (result);
 	}
-	return (0);
 }
 
 static double	calculate_diagonal_ray_len(t_game *game)
