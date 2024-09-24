@@ -2,6 +2,7 @@
 # define CUB3D_H
 
 # include <stdio.h>
+# include <stdbool.h>
 # include <math.h>
 # include <stdlib.h> // Can remove it later since we will use libft
 

@@ -24,7 +24,7 @@ static void	init_game(t_game *game)
 			}
 		}
 	}
-	game->player->angle = 0;
+	game->player->angle = 15;
 	/////////////////////
 	game->map = malloc(sizeof(char *) * 6);
 	for (int i = 0; i < 6; i++) {
