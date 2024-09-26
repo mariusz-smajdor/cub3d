@@ -29,5 +29,6 @@ typedef struct s_game
 
 double	calculate_ray_len(t_game *game);
 double	calculate_straight_ray_len(t_game *game);
+double	calculate_ray_0_90_len(t_game *game);
 
 #endif
