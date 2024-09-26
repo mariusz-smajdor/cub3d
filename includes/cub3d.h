@@ -6,6 +6,14 @@
 # include <math.h>
 # include <stdlib.h> // Can remove it later since we will use libft
 
+typedef struct s_ray
+{
+	double	x;
+	double	y;
+	double	unit;
+	double	hypotenuse;
+}	t_ray;
+
 typedef struct s_player
 {
 	double x;
