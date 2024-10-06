@@ -1,53 +1,50 @@
 #include "cub3d.h"
 
-static double calculate_x_ray(t_game *game, t_ray *ray)
+static t_ray	calculate_x_ray(t_ray ray)
 {
-	double unit_hypotenuse;
+	double	unit_hypotenuse;
 
-	unit_hypotenuse = ray->unit / sin(game->player->angle * M_PI / 180);
-    ray->hypotenuse += unit_hypotenuse;
-    ray->y -= unit_hypotenuse * cos(game->player->angle * M_PI / 180);
-    ray->x += ray->unit;
-    ray->unit = 1;
-    if (game->map[(int)ray->y][(int)ray->x] == '1')
-        return (ray->hypotenuse);
-    return (-1);
+	if (ray.x != ceil(ray.x))
+		ray.unit = ceil(ray.x) - ray.x;
+	else
+		ray.unit = 1;
+	unit_hypotenuse = ray.unit / ray.sin_angle;
+	ray.hypotenuse += unit_hypotenuse;
+	ray.y -= unit_hypotenuse * ray.cos_angle;
+	ray.x += ray.unit;
+	return (ray);
 }
 
-static double calculate_y_ray(t_game *game, t_ray *ray)
+static t_ray	calculate_y_ray(t_ray ray)
 {
-	double unit_hypotenuse;
+	double	unit_hypotenuse;
 
-	unit_hypotenuse = ray->unit / cos(game->player->angle * M_PI / 180);
-    ray->hypotenuse += unit_hypotenuse;
-    ray->x += unit_hypotenuse * sin(game->player->angle * M_PI / 180);
-    ray->y -= ray->unit;
-    ray->unit = 1;
-    if (game->map[(int)ray->y - 1][(int)ray->x] == '1')
-        return (ray->hypotenuse);
-    return (-1);
+	if (ray.y != floor(ray.y))
+		ray.unit = ray.y - floor(ray.y);
+	else
+		ray.unit = 1;
+	unit_hypotenuse = ray.unit / ray.cos_angle;
+    ray.hypotenuse += unit_hypotenuse;
+    ray.x += unit_hypotenuse * ray.sin_angle;
+    ray.y -= ray.unit;
+    return (ray);
 }
 
 double	calculate_ray_0_90_len(t_game *game)
 {
-	double	result;
+	t_ray	ray;
 	t_ray	x_unit_ray;
 	t_ray	y_unit_ray;
 
-	initiate_ray(game, &x_unit_ray);
-	initiate_ray(game, &y_unit_ray);
-	if (x_unit_ray.x != floor(x_unit_ray.x))
-		x_unit_ray.unit = ceil(x_unit_ray.x) - x_unit_ray.x;
-	if (y_unit_ray.y != floor(y_unit_ray.y))
-		y_unit_ray.unit = y_unit_ray.y - floor(y_unit_ray.y);
-	while (true)
+	initiate_ray(game, &ray);
+	while (game->map[(int)ceil(ray.y) - 1][(int)floor(ray.x)] != '1')
 	{
-		if (x_unit_ray.unit / cos(game->player->angle * M_PI / 180) <
-			y_unit_ray.unit / sin(game->player->angle * M_PI / 180))
-			result = calculate_y_ray(game, &y_unit_ray);
+		x_unit_ray = calculate_x_ray(ray);
+		y_unit_ray = calculate_y_ray(ray);
+		if (x_unit_ray.hypotenuse < y_unit_ray.hypotenuse)
+			ray = x_unit_ray;
 		else
-			result = calculate_x_ray(game, &x_unit_ray);
-		if (result != -1)
-			return (result);
+			ray = y_unit_ray;
 	}
+	return (ray.hypotenuse);
 }
