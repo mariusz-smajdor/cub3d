@@ -34,6 +34,7 @@ double	calculate_ray_len(t_game *game);
 double	calculate_straight_ray_len(t_game *game);
 double	calculate_ray_0_90_len(t_game *game);
 double	calculate_ray_90_180_len(t_game *game);
+double	calculate_ray_180_270_len(t_game *game);
 
 void	initiate_ray(t_game *game, t_ray *ray);
 
