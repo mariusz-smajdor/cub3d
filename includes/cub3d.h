@@ -12,6 +12,9 @@ typedef struct s_ray
 	double	y;
 	double	unit;
 	double	hypotenuse;
+	double	angle_radians;
+	double	sin_angle;
+	double	cos_angle;
 }	t_ray;
 
 typedef struct s_player
@@ -30,6 +33,7 @@ typedef struct s_game
 double	calculate_ray_len(t_game *game);
 double	calculate_straight_ray_len(t_game *game);
 double	calculate_ray_0_90_len(t_game *game);
+double	calculate_ray_90_180_len(t_game *game);
 
 void	initiate_ray(t_game *game, t_ray *ray);
 
