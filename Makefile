@@ -4,7 +4,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I./includes
 LIBS = -lm
 
-RAYS_SRCS = rays/calculate_ray_len.c rays/calculate_straight_ray_len.c rays/calculate_ray_0_90_len.c
+RAYS_SRCS = rays/calculate_ray_len.c rays/calculate_straight_ray_len.c rays/calculate_ray_0_90_len.c \
+			rays/calculate_ray_90_180_len.c rays/calculate_ray_180_270_len.c
 
 SRCS_DIR = srcs
 SRCS = cub3d.c utils.c $(RAYS_SRCS) 
