@@ -19,8 +19,8 @@ static t_ray	calculate_y_ray(t_ray ray)
 {
 	double	unit_hypotenuse;
 
-	if (ray.y != floor(ray.y))
-		ray.unit = ray.y - floor(ray.y);
+	if (ray.y != ceil(ray.y))
+		ray.unit = ceil(ray.y) - ray.y;
 	else
 		ray.unit = 1;
 	unit_hypotenuse = ray.unit / ray.cos_angle;
