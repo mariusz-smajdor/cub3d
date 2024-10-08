@@ -12,6 +12,8 @@ static double	calculate_diagonal_ray_len(t_game *game)
 	if (game->player->angle > 180 && game->player->angle < 270)
 		return (calculate_ray_180_270_len(game));
 	// Calculate the length of ray between 270 and 360 degrees
+	if (game->player->angle > 270 && game->player->angle < 360)
+		return (calculate_ray_270_360_len(game));
 	return (0); // Return the length of the ray
 }
 
