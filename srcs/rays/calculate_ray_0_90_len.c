@@ -39,6 +39,10 @@ double	calculate_ray_0_90_len(t_game *game)
 	initiate_ray(game, &ray);
 	while (game->map[(int)ceil(ray.y) - 1][(int)floor(ray.x)] != '1')
 	{
+		if (ray.x == floor(ray.x) && ray.y == floor(ray.y)
+		&& game->map[(int)ray.y][(int)ray.x] == '1'
+		&& game->map[(int)ray.y - 1][(int)ray.x - 1] == '1')
+			break ;
 		x_unit_ray = calculate_x_ray(ray);
 		y_unit_ray = calculate_y_ray(ray);
 		if (x_unit_ray.hypotenuse < y_unit_ray.hypotenuse)
