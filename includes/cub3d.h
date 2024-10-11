@@ -5,6 +5,11 @@
 # include <stdbool.h>
 # include <math.h>
 # include <stdlib.h> // Can remove it later since we will use libft
+# include "../libs/minilibx/mlx.h"
+
+# define FOV 100
+# define WIN_WIDTH 1440
+# define WIN_HEIGHT 900
 
 typedef struct s_ray
 {
@@ -26,7 +31,10 @@ typedef struct s_player
 
 typedef struct s_game
 {
+	void		*mlx;
+	void		*win;
 	char		**map;
+	double		walls[FOV];
 	t_player	*player;
 }	t_game;
 
