@@ -14,8 +14,6 @@ static char MAP[6][6] = {
 
 static void	init_game(t_game *game)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, 500, 500, "Cub3D");
 	game->player = malloc(sizeof(t_player));
 
 	// To change / remove
