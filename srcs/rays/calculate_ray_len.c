@@ -28,6 +28,7 @@
 void	caste_north_ray(t_game *game, int ray_index)
 {
 	double	*curr_pos;
+
 	game->rays[ray_index]->y = game->player->y;
 	curr_pos = &game->rays[ray_index]->y;
 	if (*curr_pos != floor(*curr_pos))
@@ -43,21 +44,78 @@ void	caste_north_ray(t_game *game, int ray_index)
 	game->rays[ray_index]->wall_side = WALL_SOUTH;
 }
 
+void	caste_east_ray(t_game *game, int ray_index)
+{
+	double	*curr_pos;
+
+	game->rays[ray_index]->x = game->player->x;
+	curr_pos = &game->rays[ray_index]->x;
+	if (*curr_pos != floor(*curr_pos))
+	{
+		game->rays[ray_index]->hypotenuse += ceil(*curr_pos) - *curr_pos;
+		*curr_pos -= *curr_pos - floor(*curr_pos);
+	}
+	while (game->map[(int)game->player->y][(int)*curr_pos + 1] != '1')
+	{
+		game->rays[ray_index]->hypotenuse += 1;
+		*curr_pos += 1;
+	}
+	game->rays[ray_index]->wall_side = WALL_WEST;
+}
+
+void	caste_south_ray(t_game *game, int ray_index)
+{
+	double	*curr_pos;
+
+	game->rays[ray_index]->y = game->player->y;
+	curr_pos = &game->rays[ray_index]->y;
+	if (*curr_pos != floor(*curr_pos))
+	{
+		game->rays[ray_index]->hypotenuse += ceil(*curr_pos) - *curr_pos;
+		*curr_pos = ceil(*curr_pos);
+	}
+	while (game->map[(int)*curr_pos][(int)game->player->x] != '1')
+	{
+		game->rays[ray_index]->hypotenuse += 1;
+		*curr_pos += 1;
+	}
+	game->rays[ray_index]->wall_side = WALL_NORTH;
+}
+
+void	caste_west_ray(t_game *game, int ray_index)
+{
+	double	*curr_pos;
+
+	game->rays[ray_index]->x = game->player->x;
+	curr_pos = &game->rays[ray_index]->x;
+	if (*curr_pos != floor(*curr_pos))
+	{
+		game->rays[ray_index]->hypotenuse += *curr_pos - floor(*curr_pos);
+		*curr_pos = floor(*curr_pos);
+	}
+	while (game->map[(int)game->player->y][(int)*curr_pos - 1] != '1')
+	{
+		game->rays[ray_index]->hypotenuse += 1;
+		*curr_pos -= 1;
+	}
+	game->rays[ray_index]->wall_side = WALL_EAST;
+}
+
 void	caste_straight_ray(t_game *game, int ray_index, double angle)
 {
 	if (angle == 0)
 		caste_north_ray(game, ray_index);
-	// else if (angle == 90)
-	// 	caste_east_ray(game, ray_index);
-	// else if (angle == 180)
-	// 	caste_south_ray(game, ray_index);
-	// else if (angle == 270)
-	// 	caste_west_ray(game, ray_index);
+	else if (angle == 90)
+		caste_east_ray(game, ray_index);
+	else if (angle == 180)
+		caste_south_ray(game, ray_index);
+	else if (angle == 270)
+		caste_west_ray(game, ray_index);
 }
 
 void	caste_ray(t_game *game, int ray_index, double angle)
 {
-	if (angle == 0)
+	if (angle == 0 || angle == 90 || angle == 180 || angle == 270)
 		caste_straight_ray(game, ray_index, angle);
 	// else
 	// 	caste_diagonal_ray(t_game *game, int ray_index, double angle);
@@ -79,8 +137,12 @@ void	caste_rays(t_game *game)
 		game->rays[i] = malloc(sizeof(t_ray));
 		game->rays[i]->hypotenuse = 0;
 		caste_ray(game, i, angle);
-		printf("angle %f: %f\n", angle, game->rays[i]->hypotenuse);
-		printf("wall side: %d\n", game->rays[i]->wall_side);
+
+		// Temporary check
+		if (game->rays[i]->wall_side != 0) {
+			printf("angle %f: %f\n", angle, game->rays[i]->hypotenuse);
+			printf("wall side: %d\n", game->rays[i]->wall_side);
+		}
 		i++;
 		angle += 1;
 	}

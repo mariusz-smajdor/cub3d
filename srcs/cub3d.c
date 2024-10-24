@@ -17,7 +17,7 @@ static void	init_game(t_game *game)
 	game->player = malloc(sizeof(t_player));
 	game->rays = malloc(sizeof(t_ray) * FOV);
 	// temporary player angle to for testing, later read it from the map
-	game->player->angle = 45;
+	game->player->angle = 225;
 
 	// To change / remove
 	for (int i = 0; i < 6; i++) {
