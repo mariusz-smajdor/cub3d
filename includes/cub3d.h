@@ -44,8 +44,8 @@ typedef struct s_game
 	t_player	*player;
 }	t_game;
 
-// void	calculate_ray_len(t_game *game);
-// void	calculate_straight_ray_len(t_game *game);
+void	caste_rays(t_game *game);
+void	caste_straight_ray(t_game *game, int ray_index, double angle);
 // void	calculate_ray_0_90_len(t_game *game);
 // void	calculate_ray_90_180_len(t_game *game);
 // void	calculate_ray_180_270_len(t_game *game);
