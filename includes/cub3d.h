@@ -51,7 +51,7 @@ void	caste_straight_ray(t_game *game, int ray_index, double angle);
 // void	calculate_ray_180_270_len(t_game *game);
 // void	calculate_ray_270_360_len(t_game *game);
 
-// void	initiate_ray(t_game *game, t_ray *ray);
+void	initiate_ray(t_game *game, int ray_index, double angle);
 void	caste_rays(t_game *game);
 
 #endif
