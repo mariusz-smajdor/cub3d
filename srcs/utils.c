@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	initiate_ray(t_game *game, int ray_index, double angle)
+void	initiate_ray(t_game *game, int ray_index, int angle)
 {
 	t_ray	*ray;
 

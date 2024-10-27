@@ -1,90 +1,20 @@
 #include "cub3d.h"
 
-static t_ray	move_by_x_unit(t_ray ray)
-{
-	double	unit_hypotenuse;
-
-	if (ray.x != ceil(ray.x))
-		ray.unit = ceil(ray.x) - ray.x;
-	else
-		ray.unit = 1;
-	unit_hypotenuse = ray.unit / ray.sin_angle;
-	ray.hypotenuse += unit_hypotenuse;
-	ray.y -= unit_hypotenuse * ray.cos_angle;
-	ray.x += ray.unit;
-	return (ray);
-}
-
-static t_ray	move_by_y_unit(t_ray ray)
-{
-	double	unit_hypotenuse;
-
-	if (ray.y != floor(ray.y))
-		ray.unit = ray.y - floor(ray.y);
-	else
-		ray.unit = 1;
-	unit_hypotenuse = ray.unit / ray.cos_angle;
-    ray.hypotenuse += unit_hypotenuse;
-    ray.x += unit_hypotenuse * ray.sin_angle;
-    ray.y -= ray.unit;
-    return (ray);
-}
-
-// double	calculate_ray_0_90_len(t_game *game)
-// {
-// 	t_ray	ray;
-// 	t_ray	x_unit_ray;
-// 	t_ray	y_unit_ray;
-
-// 	initiate_ray(game, &ray);
-// 	while (game->map[(int)ceil(ray.y) - 1][(int)floor(ray.x)] != '1')
-// 	{
-// 		if (ray.x == floor(ray.x) && ray.y == floor(ray.y)
-// 		&& game->map[(int)ray.y][(int)ray.x] == '1'
-// 		&& game->map[(int)ray.y - 1][(int)ray.x - 1] == '1')
-// 			break ;
-// 		x_unit_ray = calculate_x_ray(ray);
-// 		y_unit_ray = calculate_y_ray(ray);
-// 		if (x_unit_ray.hypotenuse < y_unit_ray.hypotenuse)
-// 			ray = x_unit_ray;
-// 		else
-// 			ray = y_unit_ray;
-// 	}
-// 	return (ray.hypotenuse);
-// }
-
-void	caste_0_90_angle_ray(t_game *game, int ray_index, double angle)
-{
-	t_ray	*ray;
-	t_ray	x_unit_ray;
-	t_ray	y_unit_ray;
-
-	ray = game->rays[ray_index];
-	initiate_ray(game, ray_index, angle);
-	while (game->map[(int)ceil(ray->y) - 1][(int)floor(ray->x)] != '1')
-	{
-		if (ray->x == floor(ray->x) && ray->y == floor(ray->y)
-		&& game->map[(int)ray->y][(int)ray->x] == '1'
-		&& game->map[(int)ray->y - 1][(int)ray->x - 1] == '1')
-			break ;
-		x_unit_ray = move_by_x_unit(*ray);
-		y_unit_ray = move_by_y_unit(*ray);
-		if (x_unit_ray.hypotenuse < y_unit_ray.hypotenuse)
-			*ray = x_unit_ray;
-		else
-			*ray = y_unit_ray;
-	}
-}
-
-static void caste_diagonal_ray(t_game *game, int ray_index, double angle)
+static void caste_diagonal_ray(t_game *game, int ray_index, int angle)
 {
 	if (angle > 0 && angle < 90)
 		caste_0_90_angle_ray(game, ray_index, angle);
+	else if (angle > 90 && angle < 180)
+		caste_90_180_angle_ray(game, ray_index, angle);
+	else if (angle > 180 && angle < 270)
+		caste_180_270_angle_ray(game, ray_index, angle);
+	else if (angle > 270 && angle < 360)
+		caste_270_360_angle_ray(game, ray_index, angle);
 }
 
-static void	caste_ray(t_game *game, int ray_index, double angle)
+static void	caste_ray(t_game *game, int ray_index, int angle)
 {
-	if (angle == 0 || angle == 90 || angle == 180 || angle == 270)
+	if (angle % 90 == 0)
 		caste_straight_ray(game, ray_index, angle);
 	else
 		caste_diagonal_ray(game, ray_index, angle);
@@ -93,7 +23,7 @@ static void	caste_ray(t_game *game, int ray_index, double angle)
 void	caste_rays(t_game *game)
 {
 	int		i;
-	double	angle;
+	int		angle;
 
 	i = 0;
 	angle = game->player->angle - FOV / 2;
@@ -109,7 +39,7 @@ void	caste_rays(t_game *game)
 
 		// Temporary check
 		// if (game->rays[i]->wall_side != 0) {
-			printf("angle %f: %f\n", angle, game->rays[i]->hypotenuse);
+			printf("angle %d: %f\n", angle, game->rays[i]->hypotenuse);
 			printf("wall side: %d\n", game->rays[i]->wall_side);
 		// }
 		i++;

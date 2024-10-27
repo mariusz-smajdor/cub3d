@@ -4,8 +4,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I./includes
 LIBS = -lm -L libs/minilibx -lmlx -lXext -lX11
 
-RAYS_SRCS = rays/caste_rays.c rays/caste_straight_ray.c rays/calculate_ray_0_90_len.c \
-			rays/calculate_ray_90_180_len.c rays/calculate_ray_180_270_len.c rays/calculate_ray_270_360_len.c
+RAYS_SRCS = rays/caste_rays.c rays/caste_straight_ray.c rays/caste_0_90_angle_ray.c \
+			rays/caste_90_180_angle_ray.c rays/caste_180_270_angle_ray.c rays/caste_270_360_angle_ray.c
 
 SRCS_DIR = srcs
 SRCS = cub3d.c utils.c $(RAYS_SRCS) 

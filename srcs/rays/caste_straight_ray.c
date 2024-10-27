@@ -76,7 +76,7 @@ static void	caste_west_ray(t_game *game, int ray_index)
 	game->rays[ray_index]->wall_side = WALL_EAST;
 }
 
-void	caste_straight_ray(t_game *game, int ray_index, double angle)
+void	caste_straight_ray(t_game *game, int ray_index, int angle)
 {
 	if (angle == 0)
 		caste_north_ray(game, ray_index);

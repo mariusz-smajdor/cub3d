@@ -30,9 +30,9 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	double x;
-	double y;
-	double angle;
+	double	x;
+	double	y;
+	int 	angle;
 }	t_player;
 
 typedef struct s_game
@@ -45,13 +45,13 @@ typedef struct s_game
 }	t_game;
 
 void	caste_rays(t_game *game);
-void	caste_straight_ray(t_game *game, int ray_index, double angle);
-// void	calculate_ray_0_90_len(t_game *game);
-// void	calculate_ray_90_180_len(t_game *game);
-// void	calculate_ray_180_270_len(t_game *game);
-// void	calculate_ray_270_360_len(t_game *game);
+void	caste_straight_ray(t_game *game, int ray_index, int angle);
+void	caste_0_90_angle_ray(t_game *game, int ray_index, int angle);
+void	caste_90_180_angle_ray(t_game *game, int ray_index, int angle);
+void	caste_180_270_angle_ray(t_game *game, int ray_index, int angle);
+void	caste_270_360_angle_ray(t_game *game, int ray_index, int angle);
 
-void	initiate_ray(t_game *game, int ray_index, double angle);
+void	initiate_ray(t_game *game, int ray_index, int angle);
 void	caste_rays(t_game *game);
 
 #endif
