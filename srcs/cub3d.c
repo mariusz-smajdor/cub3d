@@ -42,9 +42,7 @@ int	main()
 	t_game game;
 
 	init_game(&game);
-
-	// Print ray length
-
 	caste_rays(&game);
+	// calculate_walls_height(&game);
 	return (0);
 }
