@@ -12,6 +12,7 @@ static t_ray	move_by_x_unit(t_ray ray)
 	ray.hypotenuse += unit_hypotenuse;
 	ray.y += unit_hypotenuse * ray.cos_angle;
 	ray.x -= ray.unit;
+	ray.wall_side = WALL_EAST;
 	return (ray);
 }
 
@@ -27,6 +28,7 @@ static t_ray	move_by_y_unit(t_ray ray)
     ray.hypotenuse += unit_hypotenuse;
     ray.x -= unit_hypotenuse * ray.sin_angle;
     ray.y += ray.unit;
+	ray.wall_side = WALL_NORTH;
     return (ray);
 }
 
