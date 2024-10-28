@@ -26,6 +26,7 @@ typedef struct s_ray
 	double	angle_radians;
 	double	sin_angle;
 	double	cos_angle;
+	double 	wall_height;
 }	t_ray;
 
 typedef struct s_player

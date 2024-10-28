@@ -36,6 +36,7 @@ void	caste_rays(t_game *game)
 		game->rays[i] = malloc(sizeof(t_ray));
 		game->rays[i]->hypotenuse = 0;
 		caste_ray(game, i, angle);
+		game->rays[i]->wall_height = (WIN_HEIGHT / game->rays[i]->hypotenuse);
 		angle++;
 		i++;
 	}
