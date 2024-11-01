@@ -1,36 +1,33 @@
 # Variables
 NAME = cub3d
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -I./includes
-LIBS = -lm -L libs/minilibx -lmlx -lXext -lX11
 
-RAYS_SRCS = rays/caste_rays.c rays/caste_straight_ray.c rays/caste_0_90_angle_ray.c \
-			rays/caste_90_180_angle_ray.c rays/caste_180_270_angle_ray.c rays/caste_270_360_angle_ray.c
+RAYS_SRCS = $(wildcard srcs/rays/caste_*.c)
+SRCS = $(wildcard srcs/*.c) $(RAYS_SRCS)
 
-SRCS_DIR = srcs
-SRCS = cub3d.c utils.c $(RAYS_SRCS) 
+OBJS = $(SRCS:.c=.o)
 
-OBJS_DIR = objs
-OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
+LIB_DIRS = libs/minilibx
+LIBS = m mlx Xext X11
+LDFLAGS_LIBS = $(addprefix -L, $(LIB_DIRS)) $(addprefix -l, $(LIBS))
 
 MINILIBX_REPO = https://github.com/42Paris/minilibx-linux.git
 MINILIBX_DIR = libs/minilibx
 
 # Default rule
-all: $(NAME) $(MINILIBX_DIR)
+all: $(MINILIBX_DIR) $(LIBS) $(NAME) 
 
 $(MINILIBX_DIR):
 	@if [ ! -d "$(MINILIBX_DIR)" ]; then \
 		git clone $(MINILIBX_REPO) $(MINILIBX_DIR); \
 	fi
 
+$(LIBS):
+	$(foreach dir, $(LIB_DIRS), make -C $(dir);)
 # Linking the final executable
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
-
-# Compiling source files into object files
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS_LIBS) -o $@
 
 # Clean object files
 clean:
