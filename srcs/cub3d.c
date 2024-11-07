@@ -45,20 +45,9 @@ int	main()
 	t_game game;
 
 	init_game(&game);
-
 	game.mlx = mlx_init();
-	// game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
-	if (game.mlx == NULL) {
-		printf("%p\n", game.mlx);
-	} else {
-		printf("aasd asd\n");
-	}
+	game.win = mlx_new_window(game.mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	caste_rays(&game);
-
-	int i = 0;
-	while (game.rays[i]) {
-		printf("Ray %d %f %f\n", game.player->angle - 50 + i, game.rays[i]->hypotenuse, game.rays[i]->wall_height);
-		i++;
-	}
+	mlx_loop(game.mlx);
 	return (0);
 }
