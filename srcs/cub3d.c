@@ -47,6 +47,31 @@ int	close_game(t_game *game)
 	exit(0);
 }
 
+void change_angle(t_game *game, int angle)
+{
+	game->player->angle += angle;
+	if (game->player->angle > 359)
+		game->player->angle = 0;
+	if (game->player->angle < 0)
+		game->player->angle = 359;
+}
+
+int handle_key_events(int keycode, t_game *game)
+{
+	// printf("%d\n", keycode);
+	if (keycode == 97)
+		change_angle(game, -1);
+	if (keycode == 100)
+		change_angle(game, 1);
+	caste_rays(game);
+	int i = 0;
+	while (game->rays[i]) {
+		printf("Ray %d %f %f\n", game->player->angle - 50 + i, game->rays[i]->hypotenuse, game->rays[i]->wall_height);
+		i++;
+	}
+	return (0);
+}
+
 int	main()
 {
 	t_game game;
