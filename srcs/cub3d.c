@@ -14,8 +14,6 @@ static char MAP[6][6] = {
 
 static void	init_game(t_game *game)
 {
-
-
 	game->player = malloc(sizeof(t_player));
 	game->rays = malloc(sizeof(t_ray) * FOV);
 	// temporary player angle to for testing, later read it from the map
@@ -37,7 +35,6 @@ static void	init_game(t_game *game)
 			game->map[i][j] = MAP[i][j];
 		}
 	}
-
 }
 
 int	main()
