@@ -16,6 +16,8 @@
 # define WALL_SOUTH 3
 # define WALL_WEST 4
 
+# define STEP 0.1
+
 typedef struct s_ray
 {
 	double	x;
@@ -54,5 +56,8 @@ void	caste_270_360_angle_ray(t_game *game, int ray_index, int angle);
 
 void	initiate_ray(t_game *game, int ray_index, int angle);
 void	caste_rays(t_game *game);
+
+int		handle_key_events(int keycode, t_game *game);
+int		close_game(t_game *game);
 
 #endif
