@@ -1,4 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   caste_rays.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/11 15:57:42 by msmajdor          #+#    #+#             */
+/*   Updated: 2024/11/11 15:57:43 by msmajdor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
+
+static void	add_wall_data(t_ray *ray)
+{
+	double	wall_height;
+
+	wall_height = WIN_HEIGHT / ray->hypotenuse;
+	if (wall_height > WIN_HEIGHT)
+		wall_height = WIN_HEIGHT;
+	ray->wall_start = (WIN_HEIGHT - wall_height) / 2;
+	ray->wall_end = WIN_HEIGHT - ray->wall_start;
+}
 
 static void caste_diagonal_ray(t_game *game, int ray_index, int angle)
 {
@@ -18,6 +41,7 @@ static void	caste_ray(t_game *game, int ray_index, int angle)
 		caste_straight_ray(game, ray_index, angle);
 	else
 		caste_diagonal_ray(game, ray_index, angle);
+	add_wall_data(game->rays[i]);
 }
 
 void	caste_rays(t_game *game)
@@ -36,7 +60,6 @@ void	caste_rays(t_game *game)
 		game->rays[i] = malloc(sizeof(t_ray));
 		game->rays[i]->hypotenuse = 0;
 		caste_ray(game, i, angle);
-		game->rays[i]->wall_height = (WIN_HEIGHT / game->rays[i]->hypotenuse);
 		angle++;
 		i++;
 	}

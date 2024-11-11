@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/11 15:58:02 by msmajdor          #+#    #+#             */
+/*   Updated: 2024/11/11 15:58:03 by msmajdor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -24,11 +36,12 @@ typedef struct s_ray
 	double	y;
 	double	unit;
 	double	hypotenuse;
-	int 	wall_side;
 	double	angle_radians;
 	double	sin_angle;
 	double	cos_angle;
-	double 	wall_height;
+	int 	wall_side;
+	double 	wall_start;
+	double	wall_end;
 }	t_ray;
 
 typedef struct s_player
