@@ -8,7 +8,7 @@ static void	caste_north_ray(t_game *game, int ray_index)
 	curr_pos = &game->rays[ray_index]->y;
 	if (*curr_pos != floor(*curr_pos))
 	{
-		game->rays[ray_index]->hypotenuse += ceil(*curr_pos) - *curr_pos;
+		game->rays[ray_index]->hypotenuse += *curr_pos - floor(*curr_pos);
 		*curr_pos -= *curr_pos - floor(*curr_pos);
 	}
 	while (game->map[(int)*curr_pos - 1][(int)game->player->x] != '1')
