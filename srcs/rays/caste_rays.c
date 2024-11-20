@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:57:42 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/11 15:57:43 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:06:16 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static void	add_wall_data(t_ray *ray)
 {
 	double	wall_height;
 
-	wall_height = WIN_HEIGHT / ray->hypotenuse;
+	if (!ray->hypotenuse)
+		ray->hypotenuse = 0.0001;
+	wall_height = WIN_HEIGHT / ray->hypotenuse;  // * cos(ray->angle_radians);
 	if (wall_height > WIN_HEIGHT)
 		wall_height = WIN_HEIGHT;
 	ray->wall_start = (WIN_HEIGHT - wall_height) / 2;
@@ -41,7 +43,7 @@ static void	caste_ray(t_game *game, int ray_index, int angle)
 		caste_straight_ray(game, ray_index, angle);
 	else
 		caste_diagonal_ray(game, ray_index, angle);
-	add_wall_data(game->rays[i]);
+	add_wall_data(game->rays[ray_index]);
 }
 
 void	caste_rays(t_game *game)

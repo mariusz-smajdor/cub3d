@@ -53,4 +53,11 @@ void	caste_0_90_angle_ray(t_game *game, int ray_index, int angle)
 		else
 			*ray = y_unit_ray;
 	}
+	printf("0-90\n");
+		printf("player angle: %d\n", game->player->angle);
+	printf("ray angle: %d\n", angle);
+	printf("\n");
+	ray->hypotenuse *= cos(ray->angle_radians - game->player->angle * (M_PI / 180));
+	if (ray->hypotenuse < 0)
+		ray->hypotenuse *= -1;
 }

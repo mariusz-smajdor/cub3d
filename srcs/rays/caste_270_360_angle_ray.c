@@ -53,4 +53,11 @@ void	caste_270_360_angle_ray(t_game *game, int ray_index, int angle)
 		else
 			*ray = y_unit_ray;
 	}
+	printf("270-360\n");
+	printf("player angle: %d\n", game->player->angle);
+	printf("ray angle: %d\n", angle);
+	printf("\n");
+	ray->hypotenuse *= cos(ray->angle_radians - (game->player->angle + 270) * (M_PI / 180)); 
+		if (ray->hypotenuse < 0)
+		ray->hypotenuse *= -1;
 }
