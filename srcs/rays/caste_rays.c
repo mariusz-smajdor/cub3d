@@ -16,13 +16,11 @@ static void	add_wall_data(t_ray *ray)
 {
 	double	wall_height;
 
-	if (!ray->hypotenuse)
-		ray->hypotenuse = 0.0001;
-	wall_height = WIN_HEIGHT / ray->hypotenuse;  // * cos(ray->angle_radians);
+	wall_height = (double)WIN_HEIGHT / ray->hypotenuse;
 	if (wall_height > WIN_HEIGHT)
 		wall_height = WIN_HEIGHT;
-	ray->wall_start = (WIN_HEIGHT - wall_height) / 2;
-	ray->wall_end = WIN_HEIGHT - ray->wall_start;
+	ray->wall_start = ((double)WIN_HEIGHT - wall_height) / 2;
+	ray->wall_end = (double)WIN_HEIGHT - ray->wall_start;
 }
 
 static void caste_diagonal_ray(t_game *game, int ray_index, int angle)

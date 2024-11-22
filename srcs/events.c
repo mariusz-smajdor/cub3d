@@ -47,16 +47,15 @@ int	close_game(t_game *game)
 
 void render(t_game *game)
 {
-	int x = 0;
+	double x = 0;
 	int i = 0;
-	int ray_width = WIN_WIDTH / 100;
-
+	double ray_width = (double)WIN_WIDTH / FOV;
 	mlx_clear_window(game->mlx, game->win);
 
-	while (i < 100)
+	while (i < FOV)
 	{
 		for (double y = game->rays[i]->wall_start; y <= game->rays[i]->wall_end; y += 1) {
-			for (int w = 0; w < ray_width; w++) {
+			for (int w = 0; w <= ray_width; w++) {
 				mlx_pixel_put(game->mlx, game->win, x + w, y, 0xFFFFFF);
 			}
 		}
@@ -64,6 +63,7 @@ void render(t_game *game)
 		i++;
 	}
 }
+
 int	handle_key_events(int keycode, t_game *game)
 {
 	if (keycode == 97)
