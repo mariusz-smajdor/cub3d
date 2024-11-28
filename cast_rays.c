@@ -6,13 +6,13 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 17:07:42 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/28 15:12:59 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:41:08 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	apply_dda(t_ray *ray, char **map)
+static void	apply_dda(t_ray *ray, char **map, short *side)
 {
 	while (map[(int)ray->map_y][(int)ray->map_x] != '1')
 	{
@@ -20,13 +20,13 @@ static void	apply_dda(t_ray *ray, char **map)
 		{
 			ray->side_x += ray->delta_x;
 			ray->map_x += ray->step_x;
-			ray->wall_side = 0;
+			*side = 0;
 		}
 		else
 		{
 			ray->side_y += ray->delta_y;
 			ray->map_y += ray->step_y;
-			ray->wall_side = 1;
+			*side = 1;
 		}
 	}
 }
@@ -83,7 +83,7 @@ static void	init_ray(t_data *data, short x)
 	init_step(data->ray, data->player);
 }
 
-void	cast_rays(t_data *data)
+int	cast_rays(t_data *data)
 {
 	t_ray	*ray;
 	short	i;
@@ -93,13 +93,13 @@ void	cast_rays(t_data *data)
 	while (i < WIN_WIDTH)
 	{
 		init_ray(data, i);
-		apply_dda(ray, data->map);
-		if (ray->wall_side == 0)
-			ray->ray_length = ray->side_x - ray->delta_x;
+		apply_dda(ray, data->map, &data->wall->side);
+		if (data->wall->side == 0)
+			ray->length = ray->side_x - ray->delta_x;
 		else
-			ray->ray_length = ray->side_y - ray->delta_y;
-		printf("ray_length: %f\n", ray->ray_length);
-		draw_column(data, i);
+			ray->length = ray->side_y - ray->delta_y;
+		draw_wall(data, i);
 		i++;
 	}
+	return (0);
 }

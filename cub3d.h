@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/28 15:19:03 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:27:40 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,16 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define WIN_WIDTH 1940 //1280
-# define WIN_HEIGHT 1280 //720
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
+
+typedef struct wall
+{
+	short	side;
+	short	start;
+	short	end;
+	short	height;
+} t_wall;
 
 typedef struct s_ray
 {
@@ -31,12 +39,11 @@ typedef struct s_ray
 	double	delta_x;
 	double	delta_y;
 	double	plane_offset;
-	double	ray_length;
-	double	map_x;
-	double	map_y;
+	double	length;
+	short	map_x;
+	short	map_y;
 	short	step_x;
 	short	step_y;
-	short	wall_side;
 } t_ray;
 
 typedef struct s_player
@@ -51,12 +58,16 @@ typedef struct s_player
 
 typedef struct s_data
 {
+	void		*mlx;
+	void		*win;
 	char		**map;     
 	t_player	*player;    
-	t_ray		*ray; 
+	t_ray		*ray;
+	t_wall		*wall;
 } t_data;
 
 void	parse_map(t_data *data);
-void	cast_rays(t_data *data);
+int		cast_rays(t_data *data);
+void	draw_wall(t_data *data, short x);
 
 #endif
