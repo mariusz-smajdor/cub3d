@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:13 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/25 15:29:30 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:59:35 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 int	main(void)
 {	
+	t_data	data;
+
+	parse_map(&data);
+	cast_rays(&data);
 	return (0);
 }

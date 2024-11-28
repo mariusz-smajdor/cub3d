@@ -6,17 +6,17 @@
 #    By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 15:31:38 by msmajdor          #+#    #+#              #
-#    Updated: 2024/11/25 15:33:08 by msmajdor         ###   ########.fr        #
+#    Updated: 2024/11/26 18:50:33 by msmajdor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compiler and flags
 CC          := gcc
-CFLAGS      := -Wall -Wextra -Werror -Iincludes -Ilibs/libft -Ilibs/minilibx
+CFLAGS      := -Wall -Wextra -Werror -Iincludes -Ilibs/libft -Ilibs/minilibx -I.
 
 # Project files
 NAME        := cub3d
-SRCS        := cub3d.c
+SRCS        := $(wildcard *.c)
 OBJS        := $(SRCS:.c=.o)
 
 # Clean up
