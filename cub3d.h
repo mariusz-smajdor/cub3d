@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/28 17:05:48 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:13:43 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void	parse_map(t_data *data);
 void	start_game(t_data *data);
 int		cast_rays(t_data *data);
 void	draw_wall(t_data *data, short x);
+void	free_map(char **map);
 
 #endif
