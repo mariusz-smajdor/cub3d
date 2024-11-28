@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/28 16:27:40 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:05:48 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
+
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define ESC 65307
 
 typedef struct wall
 {
@@ -59,7 +65,7 @@ typedef struct s_player
 typedef struct s_data
 {
 	void		*mlx;
-	void		*win;
+	void		*mlx_win;
 	char		**map;     
 	t_player	*player;    
 	t_ray		*ray;
@@ -67,6 +73,7 @@ typedef struct s_data
 } t_data;
 
 void	parse_map(t_data *data);
+void	start_game(t_data *data);
 int		cast_rays(t_data *data);
 void	draw_wall(t_data *data, short x);
 

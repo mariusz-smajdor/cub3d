@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:12:03 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/28 16:38:05 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:50:07 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_wall(t_data *data, short x)
 	init_wall(data);
 	while (data->wall->start < data->wall->end)
 	{
-		mlx_pixel_put(data->mlx, data->win, x, data->wall->start, 0x0000AAFF);
+		mlx_pixel_put(data->mlx, data->mlx_win, x, data->wall->start, 0x0000AAFF);
 		data->wall->start++;
 	}
 }
