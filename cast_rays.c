@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 17:07:42 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/28 16:41:08 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:53:30 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	apply_dda(t_ray *ray, char **map, short *side)
 {
-	while (map[(int)ray->map_y][(int)ray->map_x] != '1')
+	while (map[ray->map_y][ray->map_x] != '1')
 	{
 		if (ray->side_x < ray->side_y)
 		{
@@ -58,11 +58,11 @@ static void	init_step(t_ray *ray, t_player *player)
 static void	init_delta(t_ray *ray)
 {	
 	if (ray->dir_x == 0)
-		ray->delta_x = SHRT_MAX;
+		ray->delta_x = INT_MAX;
 	else
 		ray->delta_x = fabs(1 / ray->dir_x);
 	if (ray->dir_y == 0)
-		ray->delta_y = SHRT_MAX;
+		ray->delta_y = INT_MAX;
 	else
 		ray->delta_y = fabs(1 / ray->dir_y);
 }
@@ -83,7 +83,7 @@ static void	init_ray(t_data *data, short x)
 	init_step(data->ray, data->player);
 }
 
-int	cast_rays(t_data *data)
+void	cast_rays(t_data *data)
 {
 	t_ray	*ray;
 	short	i;
@@ -101,5 +101,4 @@ int	cast_rays(t_data *data)
 		draw_wall(data, i);
 		i++;
 	}
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/28 17:13:43 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:23:48 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "libft.h"
 # include "mlx.h"
 
+# define MOVE_SPEED 0.08
+
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 
@@ -27,6 +29,14 @@
 # define S 115
 # define D 100
 # define ESC 65307
+
+typedef struct s_image {
+    void    *ptr;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+} t_image;
 
 typedef struct wall
 {
@@ -70,12 +80,14 @@ typedef struct s_data
 	t_player	*player;    
 	t_ray		*ray;
 	t_wall		*wall;
+	t_image		*image;
 } t_data;
 
 void	parse_map(t_data *data);
 void	start_game(t_data *data);
-int		cast_rays(t_data *data);
+void		cast_rays(t_data *data);
 void	draw_wall(t_data *data, short x);
+void	draw_background(t_data *data);
 void	free_map(char **map);
-
+int render(t_data *data);
 #endif

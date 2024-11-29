@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:08:55 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/28 13:06:38 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:49:24 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	parse_map(t_data *data)
 {	
 	data->player = malloc(sizeof(t_player));
 	data->ray = malloc(sizeof(t_ray));
+	data->wall = malloc(sizeof(t_wall));
+	data->image = malloc(sizeof(t_image));
 	data->map = malloc(sizeof(char *) * 7);
 	data->map[0] = ft_strdup("111111");
 	data->map[1] = ft_strdup("100001");
