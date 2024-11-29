@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/29 14:23:48 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:47:28 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_image {
     int     bits_per_pixel;
     int     line_length;
     int     endian;
+	int		floor_color;
+	int		ceiling_color;
 } t_image;
 
 typedef struct wall
@@ -85,9 +87,15 @@ typedef struct s_data
 
 void	parse_map(t_data *data);
 void	start_game(t_data *data);
-void		cast_rays(t_data *data);
-void	draw_wall(t_data *data, short x);
-void	draw_background(t_data *data);
+int		cast_rays(t_data *data);
 void	free_map(char **map);
-int render(t_data *data);
+
+// draw
+void	draw_wall(t_data *data, short x);
+void 	draw_background(t_image *image);
+
+// events
+int		handle_key_events(int keycode, t_data *data);
+int		close_game(t_data *data);
+void	move(t_data *data, int keycode);
 #endif

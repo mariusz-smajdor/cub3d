@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 17:07:42 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/29 13:53:30 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:48:09 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,14 @@ static void	init_ray(t_data *data, short x)
 	init_step(data->ray, data->player);
 }
 
-void	cast_rays(t_data *data)
+int	cast_rays(t_data *data)
 {
 	t_ray	*ray;
 	short	i;
 
 	ray = data->ray;
 	i = 0;
+	draw_background(data->image);
 	while (i < WIN_WIDTH)
 	{
 		init_ray(data, i);
@@ -101,4 +102,6 @@ void	cast_rays(t_data *data)
 		draw_wall(data, i);
 		i++;
 	}
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
+	return (0);
 }
