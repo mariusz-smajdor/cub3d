@@ -6,51 +6,38 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:12:03 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 15:01:36 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 17:58:05 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	put_pixel(t_image *image, int x, int y, int color)
+void	draw_minimap(t_data *data)
 {
-	char	*dst;
+	int	i;
+	int	j;
 
-	dst = image->addr + (y * image->line_length
-			+ x * (image->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-static void	get_distance_fog(t_image *image, int x, int y, bool is_ceil)
-{
-	float	distance;
-
-	distance = (float)y / WIN_HEIGHT;
-	if (is_ceil)
+	i = 0;
+	j = 0;
+	while (data->map[i])
 	{
-		distance = 1 - distance;
-		put_pixel(image, x, y,
-			((int)(image->ceil_rgb[0] * distance) << 16)
-			| ((int)(image->ceil_rgb[1] * distance) << 8)
-			| (int)(image->ceil_rgb[2] * distance));
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == '1')
+				put_square(data, j * MINIMAP_SCALE,
+					i * MINIMAP_SCALE, 0x00786A6A);
+			else
+				put_square(data, j * MINIMAP_SCALE,
+					i * MINIMAP_SCALE, 0x00DADAFC);
+			j++;
+		}
+		i++;
 	}
-	else
-		put_pixel(image, x, y,
-			((int)(image->floor_rgb[0] * distance) << 16)
-			| ((int)(image->floor_rgb[1] * distance) << 8)
-			| (int)(image->floor_rgb[2] * distance));
-}
-
-static void	init_wall(t_data *data)
-{
-	t_wall	*wall;
-
-	wall = data->wall;
-	wall->height = WIN_HEIGHT / data->ray->length;
-	if (wall->height > WIN_HEIGHT)
-		wall->height = WIN_HEIGHT;
-	wall->start = (WIN_HEIGHT - wall->height) / 2;
-	wall->end = WIN_HEIGHT - wall->start;
+	put_square(data,
+		data->player->pos_x * MINIMAP_SCALE - MINIMAP_SCALE / 2,
+		data->player->pos_y * MINIMAP_SCALE - MINIMAP_SCALE / 2,
+		PLAYER_COLOR);
 }
 
 void	draw_background(t_image *image)

@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:08:55 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 14:20:28 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 17:35:30 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static void	find_player(t_data *data)
 	short	x;
 	short	y;
 
-	y = -1;
-	while (++y, y < 6)
+	y = 0;
+	while (data->map[y])
 	{
-		x = -1;
-		while (++x, x < 6)
+		x = 0;
+		while (data->map[y][x])
 		{
 			if (data->map[y][x] == 'N'
 			|| data->map[y][x] == 'S'
@@ -56,8 +56,12 @@ static void	find_player(t_data *data)
 				data->player->pos_y = y + 0.5;
 				init_player(data->player, data->map[y][x]);
 			}
+			x++;
 		}
+		y++;
 	}
+	data->map_width = x;
+	data->map_height = y;
 }
 
 static void	init_data(t_data *data)
@@ -72,17 +76,18 @@ static void	init_data(t_data *data)
 	data->image->ceil_rgb[0] = 0x87;
 	data->image->ceil_rgb[1] = 0xCE;
 	data->image->ceil_rgb[2] = 0xEB;
+	data->minimap = malloc(sizeof(t_image));
 	find_player(data);
 }
 
 void	parse_map(t_data *data)
-{	
+{
 	data->map = malloc(sizeof(char *) * 7);
 	data->map[0] = ft_strdup("1111111111");
 	data->map[1] = ft_strdup("1010101011");
 	data->map[2] = ft_strdup("100N000001");
-	data->map[3] = ft_strdup("1101010101");
-	data->map[4] = ft_strdup("1000100001");
+	data->map[3] = ft_strdup("1010111011");
+	data->map[4] = ft_strdup("1010000001");
 	data->map[5] = ft_strdup("1111111111");
 	data->map[6] = NULL;
 	init_data(data);

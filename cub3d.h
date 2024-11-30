@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 15:47:28 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 17:57:56 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 
+# define MINIMAP_SCALE 8
+
 # define NORTH 0
 # define SOUTH 1
 # define WEST 2
@@ -41,7 +43,10 @@
 # define D_KEY 100
 # define ESC_KEY 65307
 
-typedef struct s_image {
+# define PLAYER_COLOR 0x003A8DFF
+
+typedef struct s_image
+{
 	void	*ptr;
 	char	*addr;
 	int		bits_per_pixel;
@@ -49,7 +54,7 @@ typedef struct s_image {
 	int		endian;
 	int		floor_rgb[3];
 	int		ceil_rgb[3];
-} t_image;
+}	t_image;
 
 typedef struct wall
 {
@@ -57,7 +62,7 @@ typedef struct wall
 	short	start;
 	short	end;
 	short	height;
-} t_wall;
+}	t_wall;
 
 typedef struct s_ray
 {
@@ -73,7 +78,7 @@ typedef struct s_ray
 	short	map_y;
 	short	step_x;
 	short	step_y;
-} t_ray;
+}	t_ray;
 
 typedef struct s_player
 {
@@ -83,24 +88,32 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-} t_player;
+}	t_player;
 
 typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
 	char		**map;
-	t_player	*player;    
+	short		map_width;
+	short		map_height;
+	t_player	*player;
 	t_ray		*ray;
 	t_wall		*wall;
 	t_image		*image;
-} t_data;
+	t_image		*minimap;
+}	t_data;
 
 void	parse_map(t_data *data);
 void	start_game(t_data *data);
-int		cast_rays(t_data *data);
+void	cast_rays(t_data *data);
 void	draw_wall(t_data *data, short x);
 void	draw_background(t_image *image);
+void	draw_minimap(t_data *data);
+void	init_wall(t_data *data);
+void	put_pixel(t_image *image, int x, int y, int color);
+void	get_distance_fog(t_image *image, int x, int y, bool is_ceil);
+void	put_square(t_data *data, int x, int y, int color);
 void	move(t_data *data, int keycode);
 void	rotate(t_player *player, int keycode);
 int		close_game(t_data *data);

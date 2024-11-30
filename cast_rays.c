@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 17:07:42 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 14:55:32 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 17:49:44 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	init_step(t_ray *ray, t_player *player)
 }
 
 static void	init_delta(t_ray *ray)
-{	
+{
 	if (ray->dir_x == 0)
 		ray->delta_x = INT_MAX;
 	else
@@ -89,14 +89,13 @@ static void	init_ray(t_data *data, short x)
 	init_step(data->ray, data->player);
 }
 
-int	cast_rays(t_data *data)
+void	cast_rays(t_data *data)
 {
 	t_ray	*ray;
 	short	i;
 
 	ray = data->ray;
 	i = 0;
-	draw_background(data->image);
 	while (i < WIN_WIDTH)
 	{
 		init_ray(data, i);
@@ -108,6 +107,4 @@ int	cast_rays(t_data *data)
 		draw_wall(data, i);
 		i++;
 	}
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
-	return (0);
 }

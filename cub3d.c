@@ -6,14 +6,14 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:13 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/28 17:05:08 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 17:51:53 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 int	main(void)
-{	
+{
 	t_data	data;
 
 	parse_map(&data);

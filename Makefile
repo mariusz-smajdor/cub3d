@@ -6,7 +6,7 @@
 #    By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 15:31:38 by msmajdor          #+#    #+#              #
-#    Updated: 2024/11/26 18:50:33 by msmajdor         ###   ########.fr        #
+#    Updated: 2024/11/30 17:48:40 by msmajdor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS      := -Wall -Wextra -Werror -Iincludes -Ilibs/libft -Ilibs/minilibx -I.
 
 # Project files
 NAME        := cub3d
-SRCS        := $(wildcard *.c)
+SRCS        := $(wildcard *.c) $(wildcard draw/*.c)
 OBJS        := $(SRCS:.c=.o)
 
 # Clean up
