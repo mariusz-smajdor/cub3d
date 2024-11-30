@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:08:55 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/29 15:33:45 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 13:21:15 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ static void	init_data(t_data *data)
 	data->ray = malloc(sizeof(t_ray));
 	data->wall = malloc(sizeof(t_wall));
 	data->image = malloc(sizeof(t_image));
-	data->image->floor_color = 0x000000;
-	data->image->ceiling_color = 0x00FF0000;
+	data->image->floor_rgb[0] = 0x59;
+	data->image->floor_rgb[1] = 0x71;
+	data->image->floor_rgb[2] = 0x81;
+	data->image->ceil_rgb[0] = 0x87;
+	data->image->ceil_rgb[1] = 0xCE;
+	data->image->ceil_rgb[2] = 0xEB;
 	find_player(data);
 }
 

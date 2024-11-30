@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/29 15:47:28 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 13:35:30 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h> // printf to remove
 # include <math.h>
+# include <stdbool.h>
 # include <limits.h>
 # include "libft.h"
 # include "mlx.h"
@@ -36,8 +37,8 @@ typedef struct s_image {
     int     bits_per_pixel;
     int     line_length;
     int     endian;
-	int		floor_color;
-	int		ceiling_color;
+	int		floor_rgb[3];
+	int		ceil_rgb[3];
 } t_image;
 
 typedef struct wall
