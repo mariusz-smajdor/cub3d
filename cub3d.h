@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 14:43:07 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 15:47:28 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define WEST 2
 # define EAST 3
 
+# define MOUSE_LEFT 1
+# define MOUSE_RIGHT 2
 # define LEFT_KEY 65361
 # define RIGHT_KEY 65363
 # define W_KEY 119
@@ -98,8 +100,9 @@ void	parse_map(t_data *data);
 void	start_game(t_data *data);
 int		cast_rays(t_data *data);
 void	draw_wall(t_data *data, short x);
-void 	draw_background(t_image *image);
-int		handle_key_events(int keycode, t_data *data);
+void	draw_background(t_image *image);
+void	move(t_data *data, int keycode);
+void	rotate(t_player *player, int keycode);
 int		close_game(t_data *data);
 void	free_map(char **map);
 

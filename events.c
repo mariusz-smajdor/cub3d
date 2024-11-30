@@ -6,13 +6,13 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:40:37 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 14:31:10 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 15:49:56 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	move(t_data *data, int keycode)
+void	move(t_data *data, int keycode)
 {
 	t_player	*player;
 	short		direction;
@@ -36,7 +36,7 @@ static void	move(t_data *data, int keycode)
 		player->pos_y += step_y;
 }
 
-static void	rotate(t_player *player, int keycode)
+void	rotate(t_player *player, int keycode)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -46,12 +46,20 @@ static void	rotate(t_player *player, int keycode)
 		angle = -ROTATE_SPEED;
 	else if (keycode == RIGHT_KEY)
 		angle = ROTATE_SPEED;
+	else if (keycode == MOUSE_LEFT)
+		angle = -ROTATE_SPEED / 2;
+	else if (keycode == MOUSE_RIGHT)
+		angle = ROTATE_SPEED / 2;
 	old_dir_x = player->dir_x;
 	old_plane_x = player->plane_x;
-	player->dir_x = player->dir_x * cos(angle) - player->dir_y * sin(angle);
-	player->dir_y = old_dir_x * sin(angle) + player->dir_y * cos(angle);
-	player->plane_x = player->plane_x * cos(angle) - player->plane_y * sin(angle);
-	player->plane_y = old_plane_x * sin(angle) + player->plane_y * cos(angle);
+	player->dir_x = player->dir_x * cos(angle)
+		- player->dir_y * sin(angle);
+	player->dir_y = old_dir_x * sin(angle)
+		+ player->dir_y * cos(angle);
+	player->plane_x = player->plane_x * cos(angle)
+		- player->plane_y * sin(angle);
+	player->plane_y = old_plane_x * sin(angle)
+		+ player->plane_y * cos(angle);
 }
 
 int	close_game(t_data *data)
@@ -60,18 +68,4 @@ int	close_game(t_data *data)
 	free(data->mlx);
 	free_map(data->map);
 	exit(0);
-}
-
-int	handle_key_events(int keycode, t_data *data)
-{
-	if (keycode == ESC_KEY)
-		close_game(data);
-	else if (keycode == W_KEY
-		|| keycode == S_KEY
-		|| keycode == A_KEY
-		|| keycode == D_KEY)
-		move(data, keycode);
-	else if (keycode == LEFT_KEY || keycode == RIGHT_KEY)
-		rotate(data->player, keycode);
-	return (0);
 }
