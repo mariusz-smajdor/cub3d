@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 17:07:42 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/29 15:48:09 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 14:55:32 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,23 @@ static void	apply_dda(t_ray *ray, char **map, short *side)
 {
 	while (map[ray->map_y][ray->map_x] != '1')
 	{
-		if (ray->side_x < ray->side_y)
-		{
-			ray->side_x += ray->delta_x;
-			ray->map_x += ray->step_x;
-			*side = 0;
-		}
-		else
+		if (ray->side_x > ray->side_y)
 		{
 			ray->side_y += ray->delta_y;
 			ray->map_y += ray->step_y;
-			*side = 1;
+			if (ray->dir_y < 0)
+				*side = NORTH;
+			else
+				*side = SOUTH;
+		}
+		else
+		{
+			ray->side_x += ray->delta_x;
+			ray->map_x += ray->step_x;
+			if (ray->dir_x < 0)
+				*side = WEST;
+			else
+				*side = EAST;
 		}
 	}
 }
@@ -95,7 +101,7 @@ int	cast_rays(t_data *data)
 	{
 		init_ray(data, i);
 		apply_dda(ray, data->map, &data->wall->side);
-		if (data->wall->side == 0)
+		if (data->wall->side > 1)
 			ray->length = ray->side_x - ray->delta_x;
 		else
 			ray->length = ray->side_y - ray->delta_y;

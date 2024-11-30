@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:12:03 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 14:04:48 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 15:01:36 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,19 @@ void	draw_background(t_image *image)
 
 void	draw_wall(t_data *data, short x)
 {
+	int	color;
+
+	color = 0x00A2CFFE;
+	if (data->wall->side == 1)
+		color = 0x006BB6FF;
+	if (data->wall->side == 2)
+		color = 0x003A8DFF;
+	if (data->wall->side == 3)
+		color = 0x001F4E8C;
 	init_wall(data);
 	while (data->wall->start < data->wall->end)
 	{
-		put_pixel(data->image, x, data->wall->start, 0x008D99AE);
+		put_pixel(data->image, x, data->wall->start, color);
 		data->wall->start++;
 	}
 }

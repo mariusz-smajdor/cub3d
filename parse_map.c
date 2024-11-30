@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:08:55 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 13:21:15 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 14:20:28 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ static void	init_data(t_data *data)
 void	parse_map(t_data *data)
 {	
 	data->map = malloc(sizeof(char *) * 7);
-	data->map[0] = ft_strdup("111111");
-	data->map[1] = ft_strdup("100001");
-	data->map[2] = ft_strdup("100S01");
-	data->map[3] = ft_strdup("100001");
-	data->map[4] = ft_strdup("100001");
-	data->map[5] = ft_strdup("111111");
+	data->map[0] = ft_strdup("1111111111");
+	data->map[1] = ft_strdup("1010101011");
+	data->map[2] = ft_strdup("100N000001");
+	data->map[3] = ft_strdup("1101010101");
+	data->map[4] = ft_strdup("1000100001");
+	data->map[5] = ft_strdup("1111111111");
 	data->map[6] = NULL;
 	init_data(data);
 }

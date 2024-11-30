@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 14:06:13 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 14:43:07 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
+
 # define LEFT_KEY 65361
 # define RIGHT_KEY 65363
 # define W_KEY 119
@@ -35,11 +40,11 @@
 # define ESC_KEY 65307
 
 typedef struct s_image {
-    void    *ptr;
-    char    *addr;
-    int     bits_per_pixel;
-    int     line_length;
-    int     endian;
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 	int		floor_rgb[3];
 	int		ceil_rgb[3];
 } t_image;
@@ -82,7 +87,7 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
-	char		**map;     
+	char		**map;
 	t_player	*player;    
 	t_ray		*ray;
 	t_wall		*wall;
@@ -92,14 +97,10 @@ typedef struct s_data
 void	parse_map(t_data *data);
 void	start_game(t_data *data);
 int		cast_rays(t_data *data);
-void	free_map(char **map);
-
-// draw
 void	draw_wall(t_data *data, short x);
 void 	draw_background(t_image *image);
-
-// events
 int		handle_key_events(int keycode, t_data *data);
 int		close_game(t_data *data);
+void	free_map(char **map);
 
 #endif
