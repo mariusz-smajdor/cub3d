@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 13:35:30 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 14:06:13 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@
 # include "mlx.h"
 
 # define MOVE_SPEED 0.08
+# define ROTATE_SPEED 0.05
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-# define ESC 65307
+# define LEFT_KEY 65361
+# define RIGHT_KEY 65363
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
+# define ESC_KEY 65307
 
 typedef struct s_image {
     void    *ptr;
@@ -98,5 +101,5 @@ void 	draw_background(t_image *image);
 // events
 int		handle_key_events(int keycode, t_data *data);
 int		close_game(t_data *data);
-void	move(t_data *data, int keycode);
+
 #endif

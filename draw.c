@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:12:03 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 13:51:50 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/11/30 14:04:48 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	put_pixel(t_image *image, int x, int y, int color)
 
 static void	get_distance_fog(t_image *image, int x, int y, bool is_ceil)
 {
-	floa	distance;
+	float	distance;
 
 	distance = (float)y / WIN_HEIGHT;
 	if (is_ceil)
