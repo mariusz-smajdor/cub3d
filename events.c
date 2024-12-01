@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:40:37 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 15:49:56 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/01 15:49:05 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	move(t_data *data, int keycode)
 		step_x = player->plane_x * MOVE_SPEED * direction;
 		step_y = player->plane_y * MOVE_SPEED * direction;
 	}
-	if (data->map[(int)player->pos_y][(int)(player->pos_x + step_x * 2)] != '1')
+	if (data->map[(int)player->pos_y][(int)(player->pos_x + step_x * 3)] != '1')
 		player->pos_x += step_x;
-	if (data->map[(int)(player->pos_y + step_y * 2)][(int)player->pos_x] != '1')
+	if (data->map[(int)(player->pos_y + step_y * 3)][(int)player->pos_x] != '1')
 		player->pos_y += step_y;
 }
 
