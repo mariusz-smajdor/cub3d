@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:12:03 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 17:58:05 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:40:40 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	draw_minimap(t_data *data)
 		i++;
 	}
 	put_square(data,
-		data->player->pos_x * MINIMAP_SCALE - MINIMAP_SCALE / 2,
-		data->player->pos_y * MINIMAP_SCALE - MINIMAP_SCALE / 2,
+		data->player->pos_x * MINIMAP_SCALE - MINIMAP_SCALE / 3,
+		data->player->pos_y * MINIMAP_SCALE - MINIMAP_SCALE / 3,
 		PLAYER_COLOR);
 }
 
@@ -66,11 +66,11 @@ void	draw_wall(t_data *data, short x)
 	int	color;
 
 	color = 0x00A2CFFE;
-	if (data->wall->side == 1)
+	if (data->wall->side == SOUTH)
 		color = 0x006BB6FF;
-	if (data->wall->side == 2)
+	else if (data->wall->side == WEST)
 		color = 0x003A8DFF;
-	if (data->wall->side == 3)
+	else if (data->wall->side == EAST)
 		color = 0x001F4E8C;
 	init_wall(data);
 	while (data->wall->start < data->wall->end)
