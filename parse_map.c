@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:08:55 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 17:35:30 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:32:40 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static void	init_player(t_player *player, char direction)
 	else if (direction == 'E')
 		player->dir_x = 1;
 	if (direction == 'N')
-		player->plane_x = 0.66;
+		player->plane_x = 0.75;
 	else if (direction == 'S')
-		player->plane_x = -0.66;
+		player->plane_x = -0.75;
 	else if (direction == 'W')
-		player->plane_y = 0.66;
+		player->plane_y = 0.75;
 	else if (direction == 'E')
-		player->plane_y = -0.66;
+		player->plane_y = -0.75;
 }
 
 static void	find_player(t_data *data)
@@ -82,13 +82,22 @@ static void	init_data(t_data *data)
 
 void	parse_map(t_data *data)
 {
-	data->map = malloc(sizeof(char *) * 7);
-	data->map[0] = ft_strdup("1111111111");
-	data->map[1] = ft_strdup("1010101011");
-	data->map[2] = ft_strdup("100N000001");
-	data->map[3] = ft_strdup("1010111011");
-	data->map[4] = ft_strdup("1010000001");
-	data->map[5] = ft_strdup("1111111111");
-	data->map[6] = NULL;
+	data->map = malloc(sizeof(char *) * 16);
+	data->map[0] = ft_strdup("11111111111111111111");
+	data->map[1] = ft_strdup("10000000001000000001");
+	data->map[2] = ft_strdup("10111111001011111001");
+	data->map[3] = ft_strdup("10100001000000001001");
+	data->map[4] = ft_strdup("10101111101111101001");
+	data->map[5] = ft_strdup("10100000000000100001");
+	data->map[6] = ft_strdup("10101100S01110111101");
+	data->map[7] = ft_strdup("10100000000000000001");
+	data->map[8] = ft_strdup("10111110111111111001");
+	data->map[9] = ft_strdup("10000010100000001001");
+	data->map[10] = ft_strdup("10111010101111101001");
+	data->map[11] = ft_strdup("10001000001000100001");
+	data->map[12] = ft_strdup("10101111111110111101");
+	data->map[13] = ft_strdup("10000000000000000001");
+	data->map[14] = ft_strdup("11111111111111111111");
+	data->map[15] = NULL;
 	init_data(data);
 }
