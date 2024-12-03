@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:28:53 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/12/03 14:56:12 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:31:07 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	init_wall(t_data *data)
 
 	wall = data->wall;
 	wall->height = WIN_HEIGHT / data->ray->length;
-	if (wall->height > WIN_HEIGHT)
-		wall->height = WIN_HEIGHT;
 	wall->start = (WIN_HEIGHT - wall->height) / 2;
+	if (wall->height > WIN_HEIGHT)
+		wall->start -= wall->start;
 	wall->end = WIN_HEIGHT - wall->start;
 }
