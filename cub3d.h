@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/12/03 14:56:15 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:33:09 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_image
 	void	*ptr;
 	char	*addr;
 	char	*path;
-	int 	width;
-	int 	height;
+	int		width;
+	int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;

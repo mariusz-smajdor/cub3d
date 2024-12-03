@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:12:03 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/12/03 14:58:41 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:32:29 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_background(t_image *image)
 	}
 }
 
-static t_image *get_wall_texture(t_data *data)
+static t_image	*get_wall_texture(t_data *data)
 {
 	if (data->wall->side == NORTH)
 		return (&data->texture[0]);
