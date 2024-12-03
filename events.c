@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:40:37 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/12/03 14:01:44 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:40:44 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,20 @@ static void	rotate(t_player *player, int keycode)
 
 int	close_game(t_data *data)
 {
+	int	i;
+
 	mlx_destroy_window(data->mlx, data->mlx_win);
+	mlx_destroy_image(data->mlx, data->image->ptr);
+	mlx_destroy_image(data->mlx, data->minimap->ptr);
+	i = 0;
+	while (i < 4)
+		mlx_destroy_image(data->mlx, data->texture[i++].ptr);
+	mlx_destroy_display(data->mlx);
+	free(data->player);
+	free(data->ray);
+	free(data->wall);
+	free(data->image);
+	free(data->minimap);
 	free(data->mlx);
 	free_map(data->map);
 	exit(0);
