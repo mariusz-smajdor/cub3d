@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:28:53 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 18:03:20 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:56:12 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,28 @@ void	put_square(t_data *data, int x, int y, int color)
 		}
 		i++;
 	}
+}
+
+void	map_texture(t_data *data, t_image *texture)
+{
+	t_player	*player;
+	t_ray		*ray;
+	t_wall		*wall;
+	float		wall_x;
+
+	player = data->player;
+	ray = data->ray;
+	wall = data->wall;
+	if (wall->side == NORTH || wall->side == SOUTH)
+		wall_x = player->pos_x + ray->length * ray->dir_x;
+	else
+		wall_x = player->pos_y + ray->length * ray->dir_y;
+	wall_x -= floor(wall_x);
+	texture->x = (int)(wall_x * texture->width);
+	if ((wall->side == SOUTH || wall->side == WEST) && texture->x > 0)
+		texture->x = texture->width - texture->x - 1;
+	texture->pos = (wall->start - WIN_HEIGHT
+			/ 2 + wall->height / 2) * texture->step;
 }
 
 void	get_distance_fog(t_image *image, int x, int y, bool is_ceil)

@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:08:55 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/12/01 17:32:40 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:42:16 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ static void	init_data(t_data *data)
 	data->image->ceil_rgb[0] = 0x87;
 	data->image->ceil_rgb[1] = 0xCE;
 	data->image->ceil_rgb[2] = 0xEB;
+	data->texture[0].path = "textures/wall_1.xpm";
+	data->texture[1].path = "textures/wall_2.xpm";
+	data->texture[2].path = "textures/wall_3.xpm";
+	data->texture[3].path = "textures/wall_4.xpm";
 	data->minimap = malloc(sizeof(t_image));
 	find_player(data);
 }

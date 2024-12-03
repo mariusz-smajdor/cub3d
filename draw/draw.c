@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:12:03 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/12/01 16:40:40 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:58:41 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,35 @@ void	draw_background(t_image *image)
 	}
 }
 
+static t_image *get_wall_texture(t_data *data)
+{
+	if (data->wall->side == NORTH)
+		return (&data->texture[0]);
+	else if (data->wall->side == SOUTH)
+		return (&data->texture[1]);
+	else if (data->wall->side == WEST)
+		return (&data->texture[2]);
+	else if (data->wall->side == EAST)
+		return (&data->texture[3]);
+	return (NULL);
+}
+
 void	draw_wall(t_data *data, short x)
 {
-	int	color;
+	t_image	*texture;
+	int		color;
 
-	color = 0x00A2CFFE;
-	if (data->wall->side == SOUTH)
-		color = 0x006BB6FF;
-	else if (data->wall->side == WEST)
-		color = 0x003A8DFF;
-	else if (data->wall->side == EAST)
-		color = 0x001F4E8C;
+	texture = get_wall_texture(data);
 	init_wall(data);
+	texture->step = (float)texture->height / data->wall->height;
+	map_texture(data, texture);
 	while (data->wall->start < data->wall->end)
 	{
+		texture->y = (int)texture->pos & (texture->height - 1);
+		texture->pos += texture->step;
+		color = *(int *)(texture->addr
+				+ (texture->y * texture->line_length
+					+ texture->x * (texture->bits_per_pixel / 8)));
 		put_pixel(data->image, x, data->wall->start, color);
 		data->wall->start++;
 	}

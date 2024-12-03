@@ -6,7 +6,7 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:35:15 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/11/30 17:57:56 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:56:15 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,18 @@ typedef struct s_image
 {
 	void	*ptr;
 	char	*addr;
+	char	*path;
+	int 	width;
+	int 	height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	int		floor_rgb[3];
 	int		ceil_rgb[3];
+	int		x;
+	int		y;
+	float	step;
+	float	pos;
 }	t_image;
 
 typedef struct wall
@@ -102,6 +109,7 @@ typedef struct s_data
 	t_wall		*wall;
 	t_image		*image;
 	t_image		*minimap;
+	t_image		texture[4];
 }	t_data;
 
 void	parse_map(t_data *data);
@@ -114,8 +122,9 @@ void	init_wall(t_data *data);
 void	put_pixel(t_image *image, int x, int y, int color);
 void	get_distance_fog(t_image *image, int x, int y, bool is_ceil);
 void	put_square(t_data *data, int x, int y, int color);
-void	move(t_data *data, int keycode);
-void	rotate(t_player *player, int keycode);
+void	map_texture(t_data *data, t_image *texture);
+int		handle_mouse_events(int x, int y, t_data *data);
+int		handle_key_events(int keycode, t_data *data);
 int		close_game(t_data *data);
 void	free_map(char **map);
 

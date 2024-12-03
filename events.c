@@ -6,13 +6,13 @@
 /*   By: msmajdor <msmajdor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:40:37 by msmajdor          #+#    #+#             */
-/*   Updated: 2024/12/01 15:49:05 by msmajdor         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:01:44 by msmajdor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	move(t_data *data, int keycode)
+static void	move(t_data *data, int keycode)
 {
 	t_player	*player;
 	short		direction;
@@ -36,7 +36,7 @@ void	move(t_data *data, int keycode)
 		player->pos_y += step_y;
 }
 
-void	rotate(t_player *player, int keycode)
+static void	rotate(t_player *player, int keycode)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -68,4 +68,42 @@ int	close_game(t_data *data)
 	free(data->mlx);
 	free_map(data->map);
 	exit(0);
+}
+
+int	handle_mouse_events(int x, int y, t_data *data)
+{
+	t_player	*player;
+	t_wall		*wall;
+
+	player = data->player;
+	wall = data->wall;
+	if (wall->side == 'N' || wall->side == 'S')
+	{
+		if (x > WIN_WIDTH * 0.8)
+			rotate(player, MOUSE_RIGHT);
+		else if (x < WIN_WIDTH * 0.2)
+			rotate(player, MOUSE_LEFT);
+	}
+	else
+	{
+		if (x > (WIN_WIDTH * 0.8))
+			rotate(player, MOUSE_RIGHT);
+		else if (x < WIN_WIDTH * 0.2)
+			rotate(player, MOUSE_LEFT);
+	}
+	return (y);
+}
+
+int	handle_key_events(int keycode, t_data *data)
+{
+	if (keycode == ESC_KEY)
+		close_game(data);
+	else if (keycode == W_KEY
+		|| keycode == S_KEY
+		|| keycode == A_KEY
+		|| keycode == D_KEY)
+		move(data, keycode);
+	else if (keycode == LEFT_KEY || keycode == RIGHT_KEY)
+		rotate(data->player, keycode);
+	return (0);
 }
