@@ -3,13 +3,13 @@
 ![cub3d gameplay](cub3d_gameplay.png)
 
 ## 📋 Table of Contents
-- [Introduction](#📜-introduction)
-- [Features](#✨-features)
-- [Requirements](#📦-requirements)
-- [How to Compile](#⚙️-how-to-compile)
-- [How to Run](#▶️-how-to-run)
-- [Controls](#🎮-controls)
-- [Credits](#🙌-credits)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Requirements](#requirements)
+- [How to Compile](#how-to-compile)
+- [How to Run](#how-to-run)
+- [Controls](#controls)
+- [Credits](#-credits)
 
 ## 📜 Introduction
 
