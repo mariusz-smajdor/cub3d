@@ -8,7 +8,7 @@
 - [Requirements](#requirements)
 - [How to Compile](#how-to-compile)
 - [How to Run](#how-to-run)
-- [Controls](#controls)
+- [Controls](#🎮_controls)
 - [Credits](#credits)
 
 ## 📜 Introduction
@@ -32,16 +32,15 @@ This project is part of the 42 curriculum and focuses on mastering raycasting, p
 ## ⚙️ How to Compile
 
 1. Clone the repository:
-```bash
-git clone https://github.com/mariusz-smajdor/cub3d.git && cd cub3d
-```
+    ```bash
+    git clone https://github.com/mariusz-smajdor/cub3d.git && cd cub3d
+    ```
+1. Run the *makefile*:
+    ```bash
+    make
+    ```
 
-2. Run the *makefile*:
-```bash
-make
-```
-
-3. Executable will be generated as *cub3d*
+1. Executable will be generated as *cub3d*
 
 ## ▶️ How to Run
 
